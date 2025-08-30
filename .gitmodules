@@ -1,0 +1,28 @@
+[submodule "platform/framework/native"]
+	path = platform/framework/native
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/frameworks/native
+	branch = android16-release
+[submodule "platform/system/core"]
+	path = platform/system/core
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/core
+	branch = android16-release
+[submodule "platform/system/libbase"]
+	path = platform/system/libbase
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/libbase
+	branch = android16-release
+[submodule "platform/system/logging"]
+	path = platform/system/logging
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/logging
+	branch = android16-release
+[submodule "platform/bionic"]
+	path = platform/bionic
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/bionic
+	branch = android16-release
+[submodule "platform/external/fmtlib"]
+	path = platform/external/fmtlib
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/fmtlib
+	branch = android16-release
+[submodule "platform/system/apex"]
+	path = platform/system/apex
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/apex
+	branch = android16-release
