@@ -5,8 +5,6 @@
 using namespace android;
 
 int main() {
-  static_assert(__ANDROID_API__ >= 36, "Only supports Android 16 and above");
-
   auto sm = defaultServiceManager();
   auto binder = sm->waitForService(StaticString16{u"activity"});
 

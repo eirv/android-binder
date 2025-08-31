@@ -1,0 +1,39 @@
+diff --git a/libs/binder/BackendUnifiedServiceManager.cpp b/libs/binder/BackendUnifiedServiceManager.cpp
+index b1c8994b05..3b621c3fcd 100644
+--- a/libs/binder/BackendUnifiedServiceManager.cpp
++++ b/libs/binder/BackendUnifiedServiceManager.cpp
+@@ -219,11 +219,15 @@ BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceM
+ 
+ Status BackendUnifiedServiceManager::getService(const ::std::string& name,
+                                                 sp<IBinder>* _aidl_return) {
++#if __ANDROID_API__ >= 36
+     os::Service service;
+     Status status = getService2(name, &service);
+     if (status.isOk()) {
+         *_aidl_return = service.get<os::Service::Tag::serviceWithMetadata>().service;
+     }
++#else
++    auto status = mTheRealServiceManager->getService(name, _aidl_return);
++#endif
+     return status;
+ }
+ 
+diff --git a/libs/binder/IServiceManager.cpp b/libs/binder/IServiceManager.cpp
+index c9ca646472..ba572d6c85 100644
+--- a/libs/binder/IServiceManager.cpp
++++ b/libs/binder/IServiceManager.cpp
+@@ -154,10 +154,14 @@ protected:
+     // When implementing CppBackendShim, use realGetService instead of
+     // mUnifiedServiceManager->getService so that it can be overridden in CppServiceManagerHostShim.
+     virtual Status realGetService(const std::string& name, sp<IBinder>* _aidl_return) {
++#if __ANDROID_API__ >= 36
+         Service service;
+         Status status = mUnifiedServiceManager->getService2(name, &service);
+         auto serviceWithMetadata = service.get<Service::Tag::serviceWithMetadata>();
+         *_aidl_return = serviceWithMetadata.service;
++#else
++        auto status = mUnifiedServiceManager->getService(name, _aidl_return);
++#endif
+         return status;
+     }
+ };
